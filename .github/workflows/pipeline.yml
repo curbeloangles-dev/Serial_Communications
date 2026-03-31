@@ -59,18 +59,22 @@ jobs:
 
       - name: Run i2c_master test
         run: |
+          cd i2c_master
           npm run test_i2c_master
 
       - name: Run i2c_master_wrapper test
         run: |
+          cd i2c_master
           npm run test_i2c_master_wrapper
 
       - name: Run i2c_master_wrapper_rec test
         run: |
+          cd i2c_master
           npm run test_i2c_master_wrapper_rec
 
       - name: Run i2c_master_axi test
         run: |
+          cd i2c_master
           npm run test_i2c_master_axi
 
   i2c_master_release:
@@ -163,6 +167,7 @@ jobs:
 
       - name: Run spi_master_axi test
         run: |
+          cd spi_master
           npm run test
 
   spi_master_release:

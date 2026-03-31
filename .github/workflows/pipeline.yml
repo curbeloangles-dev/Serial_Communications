@@ -59,19 +59,19 @@ jobs:
 
       - name: Run i2c_master test
         run: |
-          SIM=ghdl pytest -o log_cli=True i2c_master/tb/test_i2c_master.py
+          npm run test_i2c_master
 
       - name: Run i2c_master_wrapper test
         run: |
-          SIM=ghdl pytest -o log_cli=True i2c_master/tb/i2c_master_wrapper/test_i2c_master_wrapper.py
+          npm run test_i2c_master_wrapper
 
       - name: Run i2c_master_wrapper_rec test
         run: |
-          SIM=ghdl pytest -o log_cli=True i2c_master/tb/i2c_master_wrapper_rec/test_i2c_master_wrapper_rec.py
+          npm run test_i2c_master_wrapper_rec
 
       - name: Run i2c_master_axi test
         run: |
-          SIM=ghdl pytest -o log_cli=True i2c_master/tb/i2c_master_axi/test_i2c_master_axi.py
+          npm run test_i2c_master_axi
 
   i2c_master_release:
     needs: [i2c_master_check, i2c_master_test]
@@ -163,7 +163,7 @@ jobs:
 
       - name: Run spi_master_axi test
         run: |
-          SIM=ghdl pytest -o log_cli=True spi_master/tb/test_spi_master_axi.py
+          npm run test
 
   spi_master_release:
     needs: [spi_master_check, spi_master_test]

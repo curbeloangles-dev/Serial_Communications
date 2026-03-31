@@ -1,24 +1,29 @@
 {
-  "name": "@quside/spi_master",
-  "version": "1.0.2",
+  "name": "@curbeloangles-dev/spi_master",
+  "version": "1.0.0",
+  "author": "curbeloangles",
   "description": "spi master serial communication module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curbeloangles-dev/Serial_Communications.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
   "keywords": [
     "master",
     "spi"
   ],
   "files": [
-    "spi_master",
     "doc",
+    "src",
+    "tb",
     "README.md"
     ],
-  "dependencies": {
-  },
-  "homepage": "",
-  "bugs": {
-    "url": ""
-  },
+  "dependencies": {},
   "scripts": {
-    "postinstall": ""
-  },
-  "author": "Quside"
+    "postinstall": "",
+    "test": "cd tb; SIM=ghdl pytest -o log_cli=True test_spi_master_axi.py"
+  }
 }

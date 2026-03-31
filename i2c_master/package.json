@@ -1,24 +1,31 @@
 {
-  "name": "@quside/i2c_master",
-  "version": "1.2.0",
+  "name": "@curbeloangles-dev/i2c_master",
+  "version": "1.0.0",
+  "author": "curbeloangles",
   "description": "i2c master serial communication module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curbeloangles-dev/Serial_Communications.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
   "keywords": [
     "i2c"
   ],
   "files": [
-    "i2c_master",
     "doc",
-    "sw",
+    "src",
+    "tb",
     "README.md"
     ],
-  "dependencies": {
-  },
-  "homepage": "",
-  "bugs": {
-    "url": ""
-  },
+  "dependencies": {},
   "scripts": {
-    "postinstall": ""
-  },
-  "author": "Quside"
+    "postinstall": "",
+    "test_i2c_master": "cd tb; SIM=ghdl pytest -o log_cli=True test_i2c_master.py",
+    "test_i2c_master_wrapper": "cd tb; SIM=ghdl pytest -o log_cli=True test_i2c_master_wrapper.py",
+    "test_i2c_master_wrapper_rec": "cd tb; SIM=ghdl pytest -o log_cli=True test_i2c_master_wrapper_rec.py",
+    "test_i2c_master_axi": "cd tb; SIM=ghdl pytest -o log_cli=True test_i2c_master_axi.py"
+  }
 }

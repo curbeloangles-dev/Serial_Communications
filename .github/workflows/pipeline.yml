@@ -1,0 +1,199 @@
+name: Serial Communications CI/CD pipeline
+on: [push, pull_request]
+
+jobs:
+  # i2c_master jobs
+  i2c_master_check:
+    runs-on: ubuntu-latest
+    outputs:
+      should_publish: ${{ steps.check_version.outputs.should_publish }}
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_DEV }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check if version needs publishing
+        id: check_version
+        working-directory: ./i2c_master/
+        run: |
+          echo "@quside:registry=https://npm.pkg.github.com/" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
+
+          VERSION=$(jq -r .version package.json)
+          PKG=@quside/i2c_master
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          if npm view $PKG@$VERSION --registry=https://npm.pkg.github.com/ --silent; then
+            echo "✅ Package $PKG@$VERSION already exists. Skipping tests and publish."
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "📦 Package $PKG@$VERSION does not exist. Will run tests and publish."
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+
+  i2c_master_test:
+    needs: i2c_master_check
+    if: needs.i2c_master_check.outputs.should_publish == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup GHDL
+        uses: ghdl/setup-ghdl@v1
+        with:
+          version: nightly
+          backend: llvm
+          investigate: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.12'
+
+      - name: Install dependencies
+        run: |
+          pip install cocotb==1.8.1 pytest cocotb-test cocotb-bus
+
+      - name: Run i2c_master test
+        run: |
+          SIM=ghdl pytest -o log_cli=True i2c_master/tb/test_i2c_master.py
+
+      - name: Run i2c_master_wrapper test
+        run: |
+          SIM=ghdl pytest -o log_cli=True i2c_master/tb/i2c_master_wrapper/test_i2c_master_wrapper.py
+
+      - name: Run i2c_master_wrapper_rec test
+        run: |
+          SIM=ghdl pytest -o log_cli=True i2c_master/tb/i2c_master_wrapper_rec/test_i2c_master_wrapper_rec.py
+
+      - name: Run i2c_master_axi test
+        run: |
+          SIM=ghdl pytest -o log_cli=True i2c_master/tb/i2c_master_axi/test_i2c_master_axi.py
+
+  i2c_master_release:
+    needs: [i2c_master_check, i2c_master_test]
+    if: |
+      always() &&
+      github.ref == 'refs/heads/main' &&
+      needs.i2c_master_check.outputs.should_publish == 'true' &&
+      needs.i2c_master_test.result == 'success'
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_DEV }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com/'
+
+      - name: Publish i2c_master IP if version changed
+        working-directory: ./i2c_master/
+        run: |
+          echo "@quside:registry=https://npm.pkg.github.com/" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
+
+          VERSION=$(jq -r .version package.json)
+          PKG=@quside/i2c_master
+
+          echo "📦 Publishing $PKG@$VERSION..."
+          npm publish --access public
+          echo "✅ Successfully published $PKG@$VERSION"
+
+  # spi_master jobs
+  spi_master_check:
+    runs-on: ubuntu-latest
+    outputs:
+      should_publish: ${{ steps.check_version.outputs.should_publish }}
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_DEV }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check if version needs publishing
+        id: check_version
+        working-directory: ./spi_master/
+        run: |
+          echo "@quside:registry=https://npm.pkg.github.com/" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
+
+          VERSION=$(jq -r .version package.json)
+          PKG=@quside/spi_master
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          if npm view $PKG@$VERSION --registry=https://npm.pkg.github.com/ --silent; then
+            echo "✅ Package $PKG@$VERSION already exists. Skipping tests and publish."
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "📦 Package $PKG@$VERSION does not exist. Will run tests and publish."
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+
+  spi_master_test:
+    needs: spi_master_check
+    if: needs.spi_master_check.outputs.should_publish == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup GHDL
+        uses: ghdl/setup-ghdl@v1
+        with:
+          version: nightly
+          backend: llvm
+          investigate: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.12'
+
+      - name: Install dependencies
+        run: |
+          pip install cocotb==1.8.1 pytest cocotb-test cocotb-bus
+
+      - name: Run spi_master_axi test
+        run: |
+          SIM=ghdl pytest -o log_cli=True spi_master/tb/test_spi_master_axi.py
+
+  spi_master_release:
+    needs: [spi_master_check, spi_master_test]
+    if: |
+      always() &&
+      github.ref == 'refs/heads/main' &&
+      needs.spi_master_check.outputs.should_publish == 'true' &&
+      needs.spi_master_test.result == 'success'
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_DEV }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com/'
+
+      - name: Publish spi_master IP if version changed
+        working-directory: ./spi_master/
+        run: |
+          echo "@quside:registry=https://npm.pkg.github.com/" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
+
+          VERSION=$(jq -r .version package.json)
+          PKG=@quside/spi_master
+
+          echo "📦 Publishing $PKG@$VERSION..."
+          npm publish --access public
+          echo "✅ Successfully published $PKG@$VERSION"

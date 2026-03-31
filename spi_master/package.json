@@ -1,0 +1,24 @@
+{
+  "name": "@quside/spi_master",
+  "version": "1.0.2",
+  "description": "spi master serial communication module",
+  "keywords": [
+    "master",
+    "spi"
+  ],
+  "files": [
+    "spi_master",
+    "doc",
+    "README.md"
+    ],
+  "dependencies": {
+  },
+  "homepage": "",
+  "bugs": {
+    "url": ""
+  },
+  "scripts": {
+    "postinstall": ""
+  },
+  "author": "Quside"
+}

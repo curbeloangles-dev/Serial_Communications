@@ -1,0 +1,20 @@
+v 4
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/i2c_master/src/i2c_master_utils_pkg.vhd" "569ba8b4e8b1f01f816c8527d2c30622a6a27d78" "20260331102959.976":
+  package i2c_master_utils_pkg at 2( 1) + 0 on 11;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/i2c_master/src/i2c_interface_regs_pkg.vhd" "fde3ebdb366d7d4be128dd5da509b6875b6d5ece" "20260331103000.008":
+  package i2c_interface_regs_pkg at 20( 1259) + 0 on 12;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/i2c_master/src/i2c_master.vhd" "8f7e60d5f7d8ec57bcb5307a186f2d603bd1aec7" "20260331103000.095":
+  entity i2c_master at 47( 2773) + 0 on 13;
+  architecture logic of i2c_master at 74( 4028) + 0 on 14;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/i2c_master/src/i2c_master_wrapper.vhd" "58edb0165f6e1c45b6530eb57b4ee6c550e787a3" "20260331103000.171":
+  entity i2c_master_wrapper at 7( 242) + 0 on 15;
+  architecture rtl of i2c_master_wrapper at 81( 3507) + 0 on 16;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/i2c_master/src/i2c_master_wrapper_rec.vhd" "edb11cac674458f7415cf0995c93a6f17768d666" "20260331103000.228":
+  entity i2c_master_wrapper_rec at 3( 40) + 0 on 17;
+  architecture rtl of i2c_master_wrapper_rec at 46( 1567) + 0 on 18;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/i2c_master/src/i2c_interface_regs.vhd" "015ef16564f0181a930c64f663d859bd7ed1f052" "20260331103000.316":
+  entity i2c_interface_regs at 20( 1257) + 0 on 19;
+  architecture rtl of i2c_interface_regs at 64( 2879) + 0 on 20;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/i2c_master/src/i2c_master_axi.vhd" "f5662acfca1377806f9523940e506eb1ad375f4b" "20260331103000.581":
+  entity i2c_master_axi at 46( 6183) + 0 on 21;
+  architecture rtl of i2c_master_axi at 92( 7947) + 0 on 22;

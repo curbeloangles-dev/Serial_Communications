@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1774952976" />
+    <testcase name="i2c_master_tb" classname="i2c_master_tb" file="/home/yohan/Desktop/MyGit/Serial_Communications/i2c_master/tb/i2c_master_tb.py" lineno="11" time="3.698843002319336" sim_time_ns="939995.000001" ratio_time="254132.17036018617" />
+  </testsuite>
+</testsuites>

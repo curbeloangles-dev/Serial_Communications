@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1774953024" />
+    <testcase name="run_test" classname="spi_master_axi_tb" file="/home/yohan/Desktop/MyGit/Serial_Communications/spi_master/tb/spi_master_axi_tb.py" lineno="25" time="0.23759937286376953" sim_time_ns="42895.000001" ratio_time="180534.98830400687" />
+  </testsuite>
+</testsuites>

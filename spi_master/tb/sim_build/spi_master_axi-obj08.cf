@@ -1,0 +1,14 @@
+v 4
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/spi_master/src/spi_master_axi.vhd" "6d60899b5185ba3bbba43deb663402b5f8d880c9" "20260331103024.467":
+  entity spi_master_axi at 2( 1) + 0 on 16;
+  architecture rtl of spi_master_axi at 53( 1853) + 0 on 17;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/spi_master/src/spi_interface_regs.vhd" "c2ebbcc04f4736f6def7971c3a4786025ea93cb2" "20260331103024.248":
+  entity spi_interface_regs at 20( 1257) + 0 on 12;
+  architecture rtl of spi_interface_regs at 64( 2976) + 0 on 13;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/spi_master/src/spi_master.vhd" "c3bbf6ac331fd10b89e36af3f62c1dc7db1fcae3" "20260331103024.400":
+  entity spi_master at 25( 1179) + 0 on 14;
+  architecture logic of spi_master at 52( 2651) + 0 on 15;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/spi_master/src/spi_master_pkg.vhd" "35a9311b592778f67375227f2dc556791df4ee9d" "20260331103024.052":
+  package spi_master_pkg at 26( 1201) + 0 on 4;
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/spi_master/src/spi_interface_regs_pkg.vhd" "e594c4b689a6b55bfd177d8b20761661295c6432" "20260331103024.161":
+  package spi_interface_regs_pkg at 20( 1259) + 0 on 11;

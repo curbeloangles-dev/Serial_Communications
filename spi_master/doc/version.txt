@@ -1,0 +1,3 @@
+v1.0.0 -- Initial version. SPI AXI lite master
+v1.0.1 -- Behaviour of busy register fixed 
+v1.0.2 -- json did not include the spi_master folder

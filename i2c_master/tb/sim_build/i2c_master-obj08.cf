@@ -1,0 +1,4 @@
+v 4
+file / "/home/yohan/Desktop/MyGit/Serial_Communications/i2c_master/src/i2c_master.vhd" "8f7e60d5f7d8ec57bcb5307a186f2d603bd1aec7" "20260331102936.198":
+  entity i2c_master at 47( 2773) + 0 on 11;
+  architecture logic of i2c_master at 74( 4028) + 0 on 12;

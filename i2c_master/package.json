@@ -24,8 +24,8 @@
   "scripts": {
     "postinstall": "",
     "test_i2c_master": "cd tb; SIM=ghdl pytest -o log_cli=True test_i2c_master.py",
-    "test_i2c_master_wrapper": "cd tb; SIM=ghdl pytest -o log_cli=True test_i2c_master_wrapper.py",
-    "test_i2c_master_wrapper_rec": "cd tb; SIM=ghdl pytest -o log_cli=True test_i2c_master_wrapper_rec.py",
-    "test_i2c_master_axi": "cd tb; SIM=ghdl pytest -o log_cli=True test_i2c_master_axi.py"
+    "test_i2c_master_wrapper": "cd tb/i2c_master_wrapper; SIM=ghdl pytest -o log_cli=True test_i2c_master_wrapper.py",
+    "test_i2c_master_wrapper_rec": "cd tb/i2c_master_wrapper_rec; SIM=ghdl pytest -o log_cli=True test_i2c_master_wrapper_rec.py",
+    "test_i2c_master_axi": "cd tb/i2c_master_axi; SIM=ghdl pytest -o log_cli=True test_i2c_master_axi.py"
   }
 }

@@ -1,10 +1,10 @@
-import  glob
 from    cocotb_test.simulator import run
 import  pytest
 import  os
+import  glob
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sources_list = glob.glob(current_dir+"/../src/*.vhd")
+sources_list = glob.glob(os.path.join(current_dir, "../../src/*.vhd"))
 
 @pytest.mark.skipif(os.getenv("SIM") != "ghdl", reason="")
 def test_i2c_master_axi():
